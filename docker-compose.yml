@@ -1,0 +1,33 @@
+version: '3.2'
+
+volumes:
+  prometheus_data: {}
+
+services:
+
+  prometheus:
+    build: ./prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - '9090:9090'
+    networks:
+      - monitoring
+
+  blackbox:
+    build: ./blackbox
+    volumes:
+      - ./blackbox/blackbox.yml:/etc/blackbox/blackbox.yml
+    command:
+      - '--config.file=/etc/blackbox/blackbox.yml'
+    ports:
+      - '9115:9115'
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    driver: bridge
