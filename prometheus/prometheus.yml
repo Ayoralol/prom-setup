@@ -15,4 +15,4 @@ scrape_configs:
       - target_label: instance
         replacement: example.com
       - target_label: __address__
-        replacement: blackbox_exporter:9115
+        replacement: blackbox:9115
