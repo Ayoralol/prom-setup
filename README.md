@@ -1,4 +1,4 @@
-## Playground / Practice for Prometheus, Grafana, Blackbox Exporter
+## Playground / Practice for Prometheus, Grafana, Blackbox Exporter, nginx
 
 ### Current 
 
@@ -7,8 +7,26 @@ run
 docker compose up -d
 ```
 
-Will create the docker containers on the same network and ping https://www.example.com to check if it is live
+Creates docker containers for 
+  - blackbox
+  - prometheus
+  - grafana
+  - nginx
+  - certgen
+
+blackbox + prometheus probes 
+  - https://www.example.com
+  - https://www.google.com
+  - https://www.facebook.com
+
+Grafana then gets the data onto the dashboard and displays if the sites are up/down and some connection time metrics  
+  
+nginx lets grafana run on HTTPS connection with cergen certificates/keys  
+  
+WILL WARN YOU WHEN CONNECTING TO GRAFANA  
+  
+Just ignore the warning and connect (as it is trusted since its just this instance)  
 
 [localhost:9090/targets](localhost:9090/targets) - Shows if Site is live on Prometheus  
 [localhost:9115](localhost:9115/) - Blackbox page for debug  
-[localhost:3000](localhost:3000) - Grafana instance for dashboard access
+[https://localhost](https://localhost) - Grafana instance on HTTPS connection
