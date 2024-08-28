@@ -1,0 +1,50 @@
+volumes:
+  prometheus_data: {}
+  prom-setup-grafana-storage: {}
+
+services:
+
+  prometheus:
+    build: ./prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - '9090:9090'
+    networks:
+      - monitoring
+    container_name: prom-setup-prometheus
+
+  blackbox:
+    build: ./blackbox
+    volumes:
+      - ./blackbox/blackbox.yml:/etc/blackbox/blackbox.yml
+    command:
+      - '--config.file=/etc/blackbox/blackbox.yml'
+    ports:
+      - '9115:9115'
+    networks:
+      - monitoring
+    container_name: prom-setup-blackbox
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: prom-setup-grafana
+    ports:
+      - '3000:3000'
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - prom-setup-grafana-storage:/var/lib/grafana
+      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    driver: bridge
