@@ -858,56 +858,53 @@
   "templating": {
     "list": [
       {
-        "allValue": ".+",
         "current": {
+          "selected": false,
           "text": "blackbox_https",
           "value": "blackbox_https"
         },
-        "datasource": {
-          "uid": "${DS_PROMETHEUS}"
-        },
         "definition": "label_values(probe_success, job)",
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": "Job",
         "multi": false,
         "name": "job",
         "options": [],
-        "query": "label_values(probe_success, job)",
+        "query": {
+          "qryType": 5,
+          "query": "label_values(probe_success, job)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 2,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "sort": 0,
+        "type": "query"
       },
       {
-        "allValue": ".+",
+        "allValue": "",
         "current": {
-          "text": "example.com",
-          "value": "example.com"
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
-        "datasource": {
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "definition": "label_values(probe_success{job=~\"$job\"}, instance)",
+        "definition": "label_values(probe_success{job=\"$job\"}, instance)",
         "hide": 0,
         "includeAll": true,
         "label": "Instance",
-        "multi": false,
+        "multi": true,
         "name": "instance",
         "options": [],
-        "query": "label_values(probe_success{job=~\"$job\"}, instance)",
+        "query": {
+          "qryType": 5,
+          "query": "label_values(probe_success{job=\"$job\"}, instance)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 2,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
@@ -919,6 +916,6 @@
   "timezone": "",
   "title": "Blackbox Exporter (HTTP prober)",
   "uid": "NEzutrbMk",
-  "version": 2,
+  "version": 10,
   "weekStart": ""
 }
