@@ -9,10 +9,12 @@ scrape_configs:
     static_configs:
       - targets:
           - https://www.example.com
+          - https://www.google.com
+          - https://www.facebook.com
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
-      - target_label: instance
-        replacement: example.com
+      - source_labels: [__param_target]
+        target_label: instance
       - target_label: __address__
         replacement: blackbox:9115

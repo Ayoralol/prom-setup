@@ -407,7 +407,7 @@
         ]
       },
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 24,
         "x": 0,
         "y": 0
@@ -645,7 +645,7 @@
             "barAlignment": 0,
             "barWidthFactor": 0.6,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 13,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -653,7 +653,7 @@
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -691,16 +691,12 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 8
       },
       "id": 4,
       "options": {
         "legend": {
-          "calcs": [
-            "mean",
-            "max",
-            "min"
-          ],
+          "calcs": [],
           "displayMode": "table",
           "placement": "right",
           "showLegend": true
@@ -727,126 +723,6 @@
       ],
       "title": "HTTP Probe Duration",
       "type": "timeseries"
-    },
-    {
-      "collapsed": true,
-      "datasource": {
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 18
-      },
-      "id": 8,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "description": "Duration of http request by phase, summed over all redirects",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
-          "fill": 10,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 7,
-            "w": 24,
-            "x": 0,
-            "y": 27
-          },
-          "hiddenSeries": false,
-          "id": 6,
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 0,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.3.5",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": true,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "expr": "probe_http_duration_seconds{job=~\"$job\", instance=~\"$instance\"}",
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "{{ phase }}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": "HTTP Probe Phases Duration",
-          "tooltip": {
-            "shared": true,
-            "sort": 2,
-            "value_type": "individual"
-          },
-          "transformations": [],
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "s",
-              "logBase": 1,
-              "show": true
-            },
-            {
-              "format": "short",
-              "logBase": 1,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        }
-      ],
-      "repeat": "instance",
-      "targets": [
-        {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "refId": "A"
-        }
-      ],
-      "title": "$instance",
-      "type": "row"
     }
   ],
   "refresh": "1m",
@@ -858,67 +734,80 @@
   "templating": {
     "list": [
       {
-        "allValue": ".+",
         "current": {
+          "selected": false,
           "text": "blackbox_https",
           "value": "blackbox_https"
         },
         "datasource": {
-          "uid": "${DS_PROMETHEUS}"
+          "type": "prometheus",
+          "uid": "PBFA97CFB590B2093"
         },
         "definition": "label_values(probe_success, job)",
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": "Job",
         "multi": false,
         "name": "job",
         "options": [],
-        "query": "label_values(probe_success, job)",
+        "query": {
+          "qryType": 5,
+          "query": "label_values(probe_success, job)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 2,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "sort": 0,
+        "type": "query"
       },
       {
-        "allValue": ".+",
+        "allValue": "",
         "current": {
-          "text": "example.com",
-          "value": "example.com"
+          "selected": true,
+          "text": [
+            "https://www.example.com",
+            "https://www.facebook.com",
+            "https://www.google.com"
+          ],
+          "value": [
+            "https://www.example.com",
+            "https://www.facebook.com",
+            "https://www.google.com"
+          ]
         },
         "datasource": {
-          "uid": "${DS_PROMETHEUS}"
+          "type": "prometheus",
+          "uid": "PBFA97CFB590B2093"
         },
-        "definition": "label_values(probe_success{job=~\"$job\"}, instance)",
+        "definition": "label_values(probe_success{job=\"$job\"}, instance)",
         "hide": 0,
         "includeAll": true,
         "label": "Instance",
-        "multi": false,
+        "multi": true,
         "name": "instance",
         "options": [],
-        "query": "label_values(probe_success{job=~\"$job\"}, instance)",
+        "query": {
+          "qryType": 5,
+          "query": "label_values(probe_success{job=\"$job\"}, instance)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 2,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Blackbox Exporter (HTTP prober)",
   "uid": "NEzutrbMk",
-  "version": 2,
+  "version": 14,
   "weekStart": ""
 }
