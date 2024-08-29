@@ -326,7 +326,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "DNS Lookup Duration (s)"
+              "options": "Probe Success % (1d)"
             },
             "properties": [
               {
@@ -335,16 +335,20 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
+                      "color": "red",
                       "value": null
                     },
                     {
-                      "color": "yellow",
-                      "value": 0.1
+                      "color": "orange",
+                      "value": 99
                     },
                     {
-                      "color": "red",
-                      "value": 0.2
+                      "color": "#EAB839",
+                      "value": 99.5
+                    },
+                    {
+                      "color": "green",
+                      "value": 99.9
                     }
                   ]
                 }
@@ -357,7 +361,8 @@
                 "id": "custom.cellOptions",
                 "value": {
                   "mode": "basic",
-                  "type": "gauge"
+                  "type": "gauge",
+                  "valueDisplayMode": "text"
                 }
               },
               {
@@ -507,7 +512,8 @@
           "datasource": {
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "avg_over_time(probe_dns_lookup_time_seconds{job=~\"$job\", instance=~\"$instance\"}[1m])",
+          "editorMode": "code",
+          "expr": "avg_over_time(probe_success{job=~\"$job\", instance=~\"$instance\"}[1d]) * 100",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -569,6 +575,7 @@
               "type 8": true,
               "version": false
             },
+            "includeByName": {},
             "indexByName": {
               "Time 1": 9,
               "Time 2": 13,
@@ -612,7 +619,7 @@
               "Value #D": "Code",
               "Value #E": "Probe Duration (s)",
               "Value #F": "",
-              "Value #G": "DNS Lookup Duration (s)",
+              "Value #G": "Probe Success % (1d)",
               "Value #H": "Probe IP",
               "instance": "Instance",
               "type 6": "",
@@ -808,6 +815,6 @@
   "timezone": "",
   "title": "Blackbox Exporter (HTTP prober)",
   "uid": "NEzutrbMk",
-  "version": 14,
+  "version": 15,
   "weekStart": ""
 }

@@ -59,7 +59,6 @@ services:
     networks:
       - monitoring
     restart: always
-    command: ["/bin/sh", "-c", "nginx -g 'daemon off;'"]
 
   certgen:
     image: alpine:latest
