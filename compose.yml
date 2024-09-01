@@ -3,29 +3,28 @@ volumes:
   prom-setup-grafana-storage: {}
 
 services:
-
   prometheus:
-    build: ./prometheus
+    image: ayoralol/prom-setup-prometheus:latest
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
     command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.retention.time=15d'
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.retention.time=15d"
     ports:
-      - '9090:9090'
+      - "9090:9090"
     networks:
       - monitoring
     container_name: prom-setup-prometheus
 
   blackbox:
-    build: ./blackbox
+    image: ayoralol/prom-setup-blackbox:latest
     volumes:
       - ./blackbox/blackbox.yml:/etc/blackbox/blackbox.yml
     command:
-      - '--config.file=/etc/blackbox/blackbox.yml'
+      - "--config.file=/etc/blackbox/blackbox.yml"
     ports:
-      - '9115:9115'
+      - "9115:9115"
     networks:
       - monitoring
     container_name: prom-setup-blackbox
