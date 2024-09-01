@@ -27,14 +27,14 @@ jobs:
         with:
           context: ./blackbox
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}:prom-setup-blackbox-latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/prom-setup-blackbox-latest
 
       - name: Build and push Prometheus image
         uses: docker/build-push-action@v5
         with:
           context: ./prometheus
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}:prom-setup-prometheus-latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/prom-setup-prometheus-latest
 
       - name: Deploy Services
         run: docker compose up -d
