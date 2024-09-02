@@ -4,7 +4,8 @@ volumes:
 
 services:
   prometheus:
-    image: ayoralol/prom-setup-prometheus:latest
+    # image: ayoralol/prom-setup-prometheus:latest ** FOR PIPELINES
+    build: ./prometheus
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
@@ -18,7 +19,8 @@ services:
     container_name: prom-setup-prometheus
 
   blackbox:
-    image: ayoralol/prom-setup-blackbox:latest
+    # image: ayoralol/prom-setup-blackbox:latest ** FOR PIPELINES
+    build: ./blackbox
     volumes:
       - ./blackbox/blackbox.yml:/etc/blackbox/blackbox.yml
     command:
