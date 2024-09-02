@@ -37,4 +37,4 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/prom-setup-prometheus-latest
 
       - name: Deploy Services
-        run: docker-compose up -d
+        run: docker compose up -d
