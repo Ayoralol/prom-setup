@@ -30,3 +30,5 @@ Just ignore the warning and connect (as it is trusted since its just this instan
 [localhost:9090/targets](localhost:9090/targets) - Shows if Site is live on Prometheus  
 [localhost:9115](localhost:9115/) - Blackbox page for debug  
 [https://localhost](https://localhost) - Grafana instance on HTTPS connection
+
+CI/CD pipeline is setup but commented out
