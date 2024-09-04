@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-config
+  namespace: default
+data:
+  grafana.ini: |
+    [paths]
+    provisioning = /etc/grafana/provisioning
+    dashboards = /var/lib/grafana/dashboards

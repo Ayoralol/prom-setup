@@ -1,11 +1,6 @@
-## Playground / Practice for Prometheus, Grafana, Blackbox Exporter, nginx
+## Practice Setup for Prometheus, Grafana, Blackbox Exporter, nginx, kubernetes
 
 ### Current 
-
-run 
-```bash
-docker compose up -d
-```
 
 Creates docker containers for 
   - blackbox
@@ -32,3 +27,18 @@ Just ignore the warning and connect (as it is trusted since its just this instan
 [https://localhost](https://localhost) - Grafana instance on HTTPS connection
 
 CI/CD pipeline is setup but commented out
+
+## full doc setup plan
+
+brew install --cask docker
+brew install kubectl
+brew install kind
+brew install nginx
+brew install helm
+chmod +x deploy.sh destroy.sh ports.sh
+
+./deploy.sh
+./ports.sh
+
+./destroy.sh
+
