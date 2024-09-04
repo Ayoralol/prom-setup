@@ -1,1 +1,8 @@
-nginx/certs/*
+kubernetes/grafana/certs/*
+
+*.log
+*.tmp
+*.swp
+*.bak
+
+node_modules/

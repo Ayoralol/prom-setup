@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-config
+  namespace: prom-setup-monitoring
+data:
+  grafana.ini: |
+    [server]
+    protocol = https
+    cert_file = /etc/grafana/certs/cert.pem
+    cert_key = /etc/grafana/certs/cert.key
