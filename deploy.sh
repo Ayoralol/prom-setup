@@ -10,13 +10,19 @@ kubectl apply -f kubernetes/prometheus/prometheus-deployment.yml
 kubectl apply -f kubernetes/prometheus/prometheus-service.yml
 kubectl apply -f kubernetes/blackbox/blackbox-deployment.yml
 kubectl apply -f kubernetes/blackbox/blackbox-service.yml
+kubectl apply -f kubernetes/grafana/grafana-datasource.yml
+kubectl apply -f kubernetes/grafana/grafana-dashboard.yml
+kubectl apply -f kubernetes/grafana/grafana-dashboard-provider.yml
+kubectl apply -f kubernetes/grafana/grafana-deployment.yml
+kubectl apply -f kubernetes/grafana/grafana-service.yml
 
-echo "Waiting for pods to be in Running state..."
-SECONDS_WAITED=0
-while [[ $(kubectl get pods -n prom-setup-monitoring -o jsonpath='{.items[*].status.phase}') != *"Running"* ]]; do
-  echo "Waiting for pods to be ready... ${SECONDS_WAITED}s"
-  sleep 5
-  SECONDS_WAITED=$((SECONDS_WAITED + 5))
-done
+echo "Waiting for all pods to be ready..."
 
-echo "All pods are Running after ${SECONDS_WAITED} seconds. Run ./ports.sh to activate port forwarding"
+kubectl wait --for=condition=Ready pods --all -n prom-setup-monitoring --timeout=300s
+
+if [ $? -eq 0 ]; then
+  echo "All pods are Running. Run ./ports.sh to activate port forwarding"
+else
+  echo "Timed out waiting for pods to be ready."
+  exit 1
+fi
