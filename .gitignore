@@ -1,4 +1,4 @@
-kubernetes/nginx/certs/*
+kubernetes/grafana/certs/*
 
 *.log
 *.tmp

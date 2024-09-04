@@ -8,8 +8,8 @@ kubectl port-forward svc/grafana 3000:3000 -n prom-setup-monitoring > /dev/null 
 GRAFANA_PORT_FORWARD_PID=$!
 
 echo "Prometheus is forwarded -> localhost:9090"
-echo "Blackbox is forwarded -> locahost:9115"
-echo "Grafana is forwarded -> localhost:3000"
+echo "Blackbox is forwarded -> localhost:9115"
+echo "Grafana is forwarded -> https://localhost:3000"
 
 echo "port forwarding active - ctrl+c to exit script"
 

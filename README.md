@@ -33,12 +33,12 @@ CI/CD pipeline is setup but commented out
 brew install --cask docker
 brew install kubectl
 brew install kind
-brew install nginx
-brew install helm
+brew install mkcert
+brew isntall nss // firefox users only
+mkcert -install
 chmod +x deploy.sh destroy.sh ports.sh
 
 ./deploy.sh
 ./ports.sh
-
 ./destroy.sh
 

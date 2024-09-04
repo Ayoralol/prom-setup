@@ -30,6 +30,11 @@ spec:
         - name: grafana-dashboard-provider
           mountPath: /etc/grafana/provisioning/dashboards/dashboards.yml
           subPath: dashboards.yml
+        - name: grafana-certificates
+          mountPath: /etc/grafana/certs
+        - name: grafana-config
+          mountPath: /etc/grafana/grafana.ini
+          subPath: grafana.ini
       volumes:
       - name: grafana-storage
         emptyDir: {}
@@ -42,3 +47,9 @@ spec:
       - name: grafana-dashboard-provider
         configMap:
           name: grafana-dashboard-provider
+      - name: grafana-certificates
+        configMap:
+          name: grafana-certificates
+      - name: grafana-config
+        configMap:
+          name: grafana-config
