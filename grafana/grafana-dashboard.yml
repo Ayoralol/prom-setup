@@ -752,8 +752,8 @@ data:
           {
             "current": {
               "selected": false,
-              "text": "blackbox_https",
-              "value": "blackbox_https"
+              "text": "blackbox",
+              "value": "blackbox"
             },
             "datasource": {
               "type": "prometheus",
@@ -782,14 +782,10 @@ data:
             "current": {
               "selected": true,
               "text": [
-                "https://www.example.com",
-                "https://www.facebook.com",
-                "https://www.google.com"
+                "All"
               ],
               "value": [
-                "https://www.example.com",
-                "https://www.facebook.com",
-                "https://www.google.com"
+                "$__all"
               ]
             },
             "datasource": {
@@ -824,6 +820,6 @@ data:
       "timezone": "",
       "title": "Blackbox Exporter (HTTP prober)",
       "uid": "NEzutrbMk",
-      "version": 15,
+      "version": 1,
       "weekStart": ""
     }

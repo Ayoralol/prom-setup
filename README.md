@@ -40,11 +40,24 @@ Install kind
 ```shell
 brew install kind
 ```
+
+Install helm
+```shell
+brew install helm
+```
+
+Add the required helm repo's
+```shell
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+helm repo add sloth https://slok.github.io/sloth
+```
   
 Install mkcert - if you use firefox also install nss
 ```shell
 brew install mkcert
 brew install nss # Firefox users have to have this
+
 # If you are a firefox user and have already ran 'mkcert -install', you will have to re-run it after 'brew install nss'
 ```
   

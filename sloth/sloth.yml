@@ -1,0 +1,23 @@
+apiVersion: sloth.slok.dev/v1
+kind: PrometheusServiceLevel
+metadata:
+  name: my-service-slo
+  namespace: prom-setup-monitoring
+spec:
+  service: "my-service"
+  labels:
+    owner: "my-team"
+  slos:
+    - name: availability
+      objective: 99.9
+      description: "Common SLO based on availability for HTTP request responses."
+      sli:
+        events:
+          errorQuery: sum(rate(http_request_duration_seconds_count{job="myservice",code=~"(5..|429)"}[{{.window}}])) 
+          totalQuery: sum(rate(http_request_duration_seconds_count{job="myservice"}[{{.window}}]))
+      alerting:
+        name: "MyServiceHighErrorRate"
+        pageAlert:
+          disable: false
+        ticketAlert:
+          disable: false
